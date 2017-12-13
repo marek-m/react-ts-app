@@ -2,27 +2,31 @@
 
 import * as React from 'react';
 import './Hello.css';
+import TextComponent from './Text';
 
 export interface Props {
     name: string;
     enthusiasmLevel?: number;
     onIncrement: () => void;
     onDecrement: () => void;
+    getRepos: () => void;
 }
 
-function Hello({ name, enthusiasmLevel = 1, onDecrement, onIncrement }: Props) {
+function Hello({ name, enthusiasmLevel = 1, onDecrement, onIncrement, getRepos }: Props) {
     if (enthusiasmLevel <= 0) {
         throw new Error('You could be a little more enthusiastic. :D');
     }
 
     return (
         <div className="hello">
+            <TextComponent staticText={'Hello'} clickText={ ()=> {} }/>
             <div className="greeting">
                 Hello {name + getExclamationMarks(enthusiasmLevel)}
             </div>
             <div>
                 <button onClick={onDecrement}>-</button>
                 <button onClick={onIncrement}>+</button>
+                <button onClick={getRepos}>fetch</button>
             </div>
         </div>
     );

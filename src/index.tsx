@@ -3,20 +3,24 @@ import * as ReactDOM from 'react-dom';
 import registerServiceWorker from './registerServiceWorker';
 import './index.css';
 import { enthusiasm } from './store/reducers/app-state.reducer';
-import { createStore } from 'redux';
+import {applyMiddleware, compose, createStore} from 'redux';
 import { Provider } from 'react-redux';
 import Hello from './containers/Hello';
+import {rootEpic} from './store/epics/index';
+import {createEpicMiddleware} from 'redux-observable';
 
-const enhancer = window['devToolsExtension'] ? window['devToolsExtension']()(createStore) : createStore;
-const store = enhancer(enthusiasm, {
-        enthusiasmLevel: 1,
-        languageName: 'TypeScript',
-    },
+const epicMiddleware = createEpicMiddleware(rootEpic);
+const composeEnhancers = window['__REDUX_DEVTOOLS_EXTENSION_COMPOSE__'] || compose;
+const store = createStore(
+    enthusiasm,
+    composeEnhancers(
+        applyMiddleware(epicMiddleware)
+    )
 );
 
 ReactDOM.render(
     <Provider store={store}>
-        <Hello/>
+        <Hello />
     </Provider>,
     document.getElementById('root') as HTMLElement
 );
