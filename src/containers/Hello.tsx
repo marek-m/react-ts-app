@@ -3,11 +3,13 @@ import { connect, Dispatch } from 'react-redux';
 import { AppStateModel } from '../store/model/app-state.model';
 import * as actions from '../store/actions';
 import {IAction} from '../store/actions/index';
+import {getRepoList} from '../store/index';
 
-export function mapStateToProps({ enthusiasmLevel, languageName }: AppStateModel) {
+export function mapStateToProps(state: AppStateModel) {
     return {
-        enthusiasmLevel,
-        name: languageName,
+        enthusiasmLevel: state.enthusiasmLevel,
+        name: state.languageName,
+        repos: getRepoList(state)
     };
 }
 

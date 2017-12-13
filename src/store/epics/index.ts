@@ -24,13 +24,17 @@ const fetchRepos$ = (actions$: ActionsObservable<IAction<any>>) => {
     return actions$
         .ofType(GET_REPOS)
         .pipe(
+            delay(2000),
             switchMap(() => {
                return ajax.getJSON(GITHUB_GET_REPOS).pipe(
                    map((response: Array<{name: string}>) => {
                        response.map((item) => console.log(item.name));
-                       return actions.getReposSuccess();
+                       return actions.getReposSuccess(
+                           {
+                               list: response.map((item) => ({name: item.name}))
+                           });
                    }),
-                   catchError(() => of(actions.getReposSuccess()))
+                   catchError(() => of(actions.getReposFailure()))
                )
             }))
 };

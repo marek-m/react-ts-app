@@ -2,7 +2,7 @@
 import * as React from 'react';
 
 export interface Props {
-    staticText: string;
+    repos: Array<string>;
     clickText: () => void;
 }
 
@@ -19,9 +19,9 @@ class TextComponent extends React.Component<Props, State> {
 
     render() {
         return (
-            <div>
+            <div className="repos">
                 <p className="text">{this.state.name}</p>
-                <p className="text">{this.props.staticText}</p>
+                {this.props.repos.map((repo) => <p className="text">{repo}</p>)}
                 <p className="text">
                     {`Text from parent: ${this.props.clickText}`}
                 </p>

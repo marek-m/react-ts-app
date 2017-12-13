@@ -7,19 +7,20 @@ import TextComponent from './Text';
 export interface Props {
     name: string;
     enthusiasmLevel?: number;
+    repos: Array<string>;
     onIncrement: () => void;
     onDecrement: () => void;
     getRepos: () => void;
 }
 
-function Hello({ name, enthusiasmLevel = 1, onDecrement, onIncrement, getRepos }: Props) {
+function Hello({ name, enthusiasmLevel = 1, repos, onDecrement, onIncrement, getRepos }: Props) {
     if (enthusiasmLevel <= 0) {
         throw new Error('You could be a little more enthusiastic. :D');
     }
 
     return (
         <div className="hello">
-            <TextComponent staticText={'Hello'} clickText={ ()=> {} }/>
+            <TextComponent repos={repos} clickText={ ()=> {} }/>
             <div className="greeting">
                 Hello {name + getExclamationMarks(enthusiasmLevel)}
             </div>

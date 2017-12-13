@@ -29,8 +29,15 @@ export function getRepos() {
     };
 }
 
-export function getReposSuccess() {
+export function getReposSuccess(payload: {list: Array<{name: string}>}): IAction<any> {
     return {
-        type: constants.GET_REPOS_SUCCESS
+        type: constants.GET_REPOS_SUCCESS,
+        payload
+    };
+}
+
+export function getReposFailure(): IAction<void> {
+    return {
+        type: constants.GET_REPOS_FAILURE
     };
 }

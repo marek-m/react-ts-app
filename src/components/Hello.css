@@ -1,8 +1,12 @@
-.hello {
+.repos {
     text-align: center;
     margin: 20px;
-    font-size: 48px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Spectral', serif;
+    font-size: 25px;
+}
+
+.repos p::first-letter {
+    color: red;
 }
 
 .hello button {
